@@ -67,9 +67,11 @@ def _platform_mgmt_link_check(intf):
     use it instead of the kernel operstate. If not implemented (returns None)
     or on error, return None to fall back to the kernel operstate.
 
-    @return 'up' if the platform reports link up;
-            'down' if the platform reports link down;
-            None if the platform does not override or on error.
+   @return 'up'   if the platform override reports link up;
+           'down' if the platform override reports link down;
+           None   if the platform does not override (not implemented or
+                  error), in which case ZTP falls back to the kernel link
+                  state (/sys/class/net/<port>/operstate).
     """
     try:
         chassis = sonic_platform.platform.Platform().get_chassis()
